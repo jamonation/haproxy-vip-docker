@@ -1,0 +1,23 @@
+---
+# file: roles/haproxy-vip-docker/tasks/populate_target_files.yml
+
+- name: create /opt/haproxy-vip-docker directory
+  file: dest=/opt/haproxy-vip-docker owner=root group=root mode=0755 state=directory
+  tags:
+    - haproxy
+    - docker
+
+- name: add dockerfile
+  template: src=Dockerfile dest=/opt/haproxy-vip-docker/Dockerfile owner=root group=root mode=0644
+  tags:
+    - docker  
+
+- name: install haproxy.cfg
+  template: src=haproxy.cfg dest=/opt/haproxy-vip-docker/haproxy.cfg owner=root group=root mode=0644
+  tags: 
+    - haproxy
+
+- name: install keepalived-haproxy.cfg
+  template: src=keepalived-haproxy.cfg dest=/opt/haproxy-vip-docker/keepalived-haproxy.cfg owner=root group=root mode=0644
+  tags: 
+    - haproxy

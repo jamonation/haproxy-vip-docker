@@ -1,0 +1,35 @@
+---
+# file: roles/haproxy-vip-docker/vars/main.yml
+
+# change to match your subnet 
+haproxy_vip: 10.0.0.125
+
+# use an alternate port if needed. no support yet for binding to multiple ports,
+# e.g. for http and https
+haproxy_port: 80
+
+# some distros/virtualization tools use things like ens192
+haproxy_device: eth0
+
+# the good stuff. should support up to n backends
+# change the host ips to dns hostnames if you like
+haproxy_backends:
+  backend1:
+    name: backend1
+    host: 10.0.0.30
+    port: 80
+  backend2:
+    name: backend2
+    host: 10.0.0.31
+    port: 80
+
+# make this unique if you have more than one vrrp router in your multicast network
+keepalived_router_id: 50
+
+keepalived_priority: 101
+
+# set a password - unsupported
+keepalived_password: FooBarBaz12345
+
+# unused, todo, don't try this yet
+keepalived_unicast: false

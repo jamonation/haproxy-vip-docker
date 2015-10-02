@@ -1,0 +1,21 @@
+---
+# file: roles/haproxy-docker/tasks/yum_install_docker.yml
+
+# Note, Centos 7 only here, per https://wiki.centos.org/Cloud/Docker
+- name: yum | install docker.io
+  yum: name=docker state=present enablerepo=extras
+  when: ansible_distribution == 'CentOS' and ansible_distribution_major_version == '7'
+  tags:
+    - docker
+
+# Note, RHEL 7 here, based on https://access.redhat.com/articles/881893#get - step 3
+- name: yum | install docker.io
+  yum: name=docker state=present enablerepo=rhel-7-server-extras-rpms,rhel-7-server-optional-rpms
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '7'
+  tags:
+    - docker
+
+- name: yum | start docker
+  service: name=docker state=started enabled=yes
+  tags:
+    - docker

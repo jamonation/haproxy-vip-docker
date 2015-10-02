@@ -1,0 +1,9 @@
+---
+# file: roles/haproxy-vip-docker/tasks/set_sysctl_entries.yml
+
+# Set ip forwarding on in /proc
+- name: enable ipv4 forwarding
+  sysctl: name="net.ipv4.ip_forward" value=1 sysctl_set=yes state=present reload=yes
+
+- name: enable nobind support for vip swapping
+  sysctl: name="net.ipv4.ip_nonlocal_bind" value=1 sysctl_set=yes state=present reload=yes

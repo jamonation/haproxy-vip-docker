@@ -1,0 +1,19 @@
+---
+# file: roles/haproxy-docker/tasks/main.yml
+
+# Install haproxy and keepalived configs
+- include: populate_target_files.yml
+
+# Set various sysctl entries, per https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Load_Balancer_Administration/s1-initial-setup-forwarding-VSA.html
+- include: set_sysctl_entries.yml
+
+# If using RHEL/Centos/Older Fedora
+- include: yum_install_docker.yml
+  when: ansible_pkg_mgr == 'yum'
+
+# If using Debian/Ubuntu
+- include: apt_install_docker.yml
+  when: ansible_pkg_mgr == 'apt'
+
+# Create and start image and containers respectively
+- include: create_docker_image.yml

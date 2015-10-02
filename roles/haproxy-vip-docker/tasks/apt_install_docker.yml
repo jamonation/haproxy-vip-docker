@@ -1,0 +1,18 @@
+---
+# file: roles/haproxy-docker/tasks/apt_install_docker.yml
+
+# Note, Jessie requires backpors repo: https://docs.docker.com/installation/debian/
+- name: apt | add jessie-backports repository
+  lineinfile: dest=/etc/apt/sources.list line="deb http://http.debian.net/debian jessie-backports main" state=present
+  when: ansible_distribution_release == 'jessie'
+
+# Ubuntu 14.04
+- name: apt | install docker.io from upstream
+  shell: curl -sSL https://get.docker.com/ | sh
+  when: ansible_distribution_release == 'trusty'
+
+- name: apt | start docker
+  service: name=docker.io state=started enabled=yes
+  tags:
+    - docker
+  when: ansible_distribution_release != 'trusty'
