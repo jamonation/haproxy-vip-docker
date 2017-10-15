@@ -10,14 +10,14 @@
 - name: add dockerfile
   template: src=Dockerfile dest=/opt/haproxy-vip-docker/Dockerfile owner=root group=root mode=0644
   tags:
-    - docker  
+    - docker
 
 - name: install haproxy.cfg
   template: src=haproxy.cfg dest=/opt/haproxy-vip-docker/haproxy.cfg owner=root group=root mode=0644
-  tags: 
+  tags:
     - haproxy
 
 - name: install keepalived-haproxy.cfg
   template: src=keepalived-haproxy.cfg dest=/opt/haproxy-vip-docker/keepalived-haproxy.cfg owner=root group=root mode=0644
-  tags: 
+  tags:
     - haproxy

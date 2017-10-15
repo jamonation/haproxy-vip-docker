@@ -5,7 +5,7 @@
   shell: "cd /opt/haproxy-vip-docker; docker build --rm -t haproxy-vip-docker ."
   tags:
     - docker
-  
+
 - name: start haproxy-vip-docker image
   shell: "docker stop haproxy-vip-docker; docker rm haproxy-vip-docker; docker run -d --name=haproxy-vip-docker --net=host --privileged=true --restart=always -v /var/run/haproxy:/var/run/haproxy haproxy-vip-docker"
   tags:

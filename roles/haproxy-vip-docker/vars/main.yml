@@ -1,7 +1,7 @@
 ---
 # file: roles/haproxy-vip-docker/vars/main.yml
 
-# change to match your subnet 
+# change to match your subnet
 haproxy_vip: 10.0.0.125
 
 # use an alternate port if needed. no support yet for binding to multiple ports,
