@@ -1,3 +1,4 @@
 - hosts: all
+  user: root
   roles:
     - haproxy-vip-docker
